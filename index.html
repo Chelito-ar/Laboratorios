@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laboratorios INTA – Buscador Institucional</title>
+  <meta name="description" content="Buscador oficial de laboratorios del Instituto Nacional de Tecnología Agropecuaria (INTA). Encuentre servicios analíticos, responsables y capacidades por Centro Regional y Unidad." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════ HEADER ══ -->
+  <header class="site-header" role="banner">
+    <div class="header-strip-top">
+      <div class="container header-strip-top__inner">
+        <span class="header-strip-top__gov">Argentina.gob.ar</span>
+        <nav class="header-strip-top__nav" aria-label="Navegación superior">
+        </nav>
+      </div>
+    </div>
+
+    <div class="header-brand">
+      <div class="container header-brand__inner">
+        <div class="header-brand__logo-area">
+          <div class="header-brand__logo-inta" aria-label="Logo INTA">
+            <div class="logo-inta-icon">
+              <span class="logo-leaf">🌿</span>
+            </div>
+            <div class="logo-inta-text">
+              <strong>INTA</strong>
+              <small>Instituto Nacional de Tecnología Agropecuaria</small>
+            </div>
+          </div>
+        </div>
+        <div class="header-brand__title-area">
+          <h1 class="header-brand__title">Buscador de Laboratorios</h1>
+          <p class="header-brand__subtitle">Red de laboratorios institucionales y servicios analíticos</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════ MAIN ═══ -->
+  <main class="main-layout" id="main-content">
+    <div class="container main-layout__inner">
+
+      <!-- ── PANEL DE FILTROS ──────────────────────────────────── -->
+      <aside class="filter-panel" role="complementary" aria-label="Filtros de búsqueda">
+        <div class="filter-panel__header">
+          <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+          </svg>
+          <span>Filtros</span>
+        </div>
+
+        <!-- Búsqueda de texto -->
+        <div class="filter-group">
+          <label class="filter-label" for="search-input">Búsqueda por texto</label>
+          <div class="search-wrapper">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input
+              type="search"
+              id="search-input"
+              class="filter-input filter-input--search"
+              placeholder="Laboratorio, responsable, análisis..."
+              autocomplete="off"
+              aria-label="Buscar por nombre de laboratorio, responsable o análisis"
+            />
+            <button class="search-clear" id="btn-clear-search" aria-label="Limpiar búsqueda" hidden>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="filter-divider"></div>
+
+        <!-- Filtro Centro Regional -->
+        <div class="filter-group">
+          <label class="filter-label" for="filter-centro">Centro Regional / Investigación</label>
+          <div class="select-wrapper">
+            <select id="filter-centro" class="filter-select" aria-label="Filtrar por Centro Regional">
+              <option value="">Todos los centros</option>
+            </select>
+            <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Filtro Unidad EEA -->
+        <div class="filter-group">
+          <label class="filter-label" for="filter-unidad">Unidad (EEA / Instituto)</label>
+          <div class="select-wrapper">
+            <select id="filter-unidad" class="filter-select" aria-label="Filtrar por Unidad EEA o Instituto">
+              <option value="">Todas las unidades</option>
+            </select>
+            <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Filtro Terceros -->
+        <div class="filter-group">
+          <label class="filter-label">Servicios a terceros</label>
+          <div class="toggle-group" role="group" aria-label="Filtrar por servicio a terceros">
+            <button class="toggle-btn toggle-btn--active" id="btn-todos" data-terceros="" aria-pressed="true">Todos</button>
+            <button class="toggle-btn" id="btn-si" data-terceros="SI" aria-pressed="false">Sí presta</button>
+            <button class="toggle-btn" id="btn-no" data-terceros="NO" aria-pressed="false">No presta</button>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="filter-divider"></div>
+
+        <!-- Botón limpiar todo -->
+        <button class="btn-reset" id="btn-reset-all" aria-label="Restablecer todos los filtros">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+            <path d="M3 3v5h5"/>
+          </svg>
+          Restablecer filtros
+        </button>
+
+        <!-- Divider -->
+        <div class="filter-divider"></div>
+
+        <!-- Leyenda -->
+        <div class="filter-legend">
+          <p class="filter-legend__title">Referencias</p>
+          <div class="filter-legend__item">
+            <span class="badge badge--terceros">Presta a terceros</span>
+            <span class="filter-legend__desc">Ofrece servicios a organismos externos</span>
+          </div>
+          <div class="filter-legend__item">
+            <span class="badge badge--acreditado">OAA</span>
+            <span class="filter-legend__desc">Acreditado ante el OAA</span>
+          </div>
+          <div class="filter-legend__item">
+            <span class="badge badge--redlab">REDLAB (SENASA)</span>
+            <span class="filter-legend__desc">Autorizado por SENASA como red de laboratorios</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ── PANEL DE RESULTADOS ────────────────────────────────── -->
+      <section class="results-panel" aria-label="Resultados de búsqueda" aria-live="polite" aria-atomic="false">
+
+        <!-- Barra de estado -->
+        <div class="results-status-bar">
+          <div class="results-count" id="results-count" aria-live="polite">
+            Cargando laboratorios...
+          </div>
+          <div class="results-sort" role="group" aria-label="Ordenar resultados">
+            <span class="results-sort__label">Ordenar:</span>
+            <select id="sort-select" class="sort-select" aria-label="Criterio de ordenamiento">
+              <option value="lab-asc">Laboratorio A–Z</option>
+              <option value="lab-desc">Laboratorio Z–A</option>
+              <option value="centro-asc">Centro Regional A–Z</option>
+              <option value="unidad-asc">Unidad A–Z</option>
+            </select>
+            <svg class="select-chevron sort-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Lista de tarjetas -->
+        <div class="lab-list" id="lab-list" role="list" aria-label="Listado de laboratorios">
+          <!-- Se renderizan dinámicamente -->
+        </div>
+
+        <!-- Estado vacío -->
+        <div class="empty-state" id="empty-state" hidden role="status">
+          <div class="empty-state__icon" aria-hidden="true">🔬</div>
+          <p class="empty-state__title">Sin resultados</p>
+          <p class="empty-state__desc">No se encontraron laboratorios con los criterios seleccionados. Pruebe ajustando los filtros o la búsqueda.</p>
+          <button class="btn-reset btn-reset--inline" id="btn-reset-empty">Restablecer filtros</button>
+        </div>
+
+        <!-- Paginación -->
+        <nav class="pagination" id="pagination" aria-label="Paginación de resultados">
+          <button class="pagination__btn" id="btn-prev" aria-label="Página anterior" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            Anterior
+          </button>
+          <div class="pagination__pages" id="pagination-pages" aria-label="Páginas"></div>
+          <button class="pagination__btn" id="btn-next" aria-label="Página siguiente">
+            Siguiente
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </button>
+        </nav>
+      </section>
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════ FOOTER ═ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container site-footer__inner">
+      <div class="site-footer__brand">
+        <strong>INTA</strong> — Instituto Nacional de Tecnología Agropecuaria
+      </div>
+      <div class="site-footer__meta">
+        <span>República Argentina</span>
+        <span class="footer-sep">·</span>
+        <span>Ministerio de Bioeconomía</span>
+        <span class="footer-sep">·</span>
+        <span id="footer-count-total"></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
