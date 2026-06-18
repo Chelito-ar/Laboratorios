@@ -160,12 +160,12 @@ select { appearance: none; -webkit-appearance: none; }
   font-size: 1.6rem;
   border: 2px solid rgba(255,255,255,.25);
 }
-.logo-inta-text strong {
+.logo-inta-img {
   display: block;
-  font-size: var(--fs-xl);
-  font-weight: 700;
-  letter-spacing: -.01em;
-  line-height: 1.1;
+  height: 36px;
+  width: auto;
+  margin-bottom: var(--space-1);
+  border-radius: var(--radius-sm);
 }
 .logo-inta-text small {
   font-size: var(--fs-xs);
